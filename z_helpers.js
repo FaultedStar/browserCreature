@@ -16,10 +16,21 @@ function windowResized() {
 
 // Touch support for mobile
 function touchStarted() {
-  // Forward touch to mousePressed so taps register as clicks
-  mousePressed();
-  // Prevents default touch behaviour (scrolling, zooming)
-  return false;
+  // Only handle touches on the canvas — let UI buttons work normally
+  if (touches.length > 0) {
+    let t = touches[0];
+    let canvas = document.querySelector('canvas');
+    let rect = canvas.getBoundingClientRect();
+    let tx = t.x !== undefined ? t.x : t.clientX;
+    let ty = t.y !== undefined ? t.y : t.clientY;
+
+    // Check if the touch landed on the canvas
+    if (tx >= rect.left && tx <= rect.right && ty >= rect.top && ty <= rect.bottom) {
+      mousePressed();
+      return false; // Prevent default only for canvas touches
+    }
+  }
+  // Let the event propagate so UI elements (buttons, etc.) work
 }
 
 

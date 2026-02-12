@@ -24,7 +24,7 @@ function loadCreatureState() {
     let saved = localStorage.getItem('creatureState');
     if (saved) {
       let data = JSON.parse(saved);
-      creature.need = data.need || 50;
+      creature.need = data.need ?? 50;
       creature.lastVisit = data.lastVisit;
       creature.totalVisits = (data.totalVisits || 0) + 1;
 
