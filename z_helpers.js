@@ -16,6 +16,8 @@ function windowResized() {
 
 // Touch support for mobile
 function touchStarted() {
+  // Forward touch to mousePressed so taps register as clicks
+  mousePressed();
   // Prevents default touch behaviour (scrolling, zooming)
   return false;
 }
